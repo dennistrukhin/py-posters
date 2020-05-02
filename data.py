@@ -1,32 +1,60 @@
 dimensions = [
     {
         "name": "30x30cm",
-        # "points": 3543,
-        "points": 1000,
-        "border": 0.125,
+        "points": 3544,
+        "upscale": 1,
+        "border": 0,
+        "quality": 100,
+        "resolution": 300,
+    },
+    {
+        "name": "50x50cm",
+        "points": 5906,
+        "upscale": 1,
+        "border": 0,
+        "quality": 95,
+        "resolution": 300,
+    },
+    {
+        "name": "100x100cm",
+        "points": 5906,
+        "upscale": 2,
+        "border": 0,
+        "quality": 95,
+        "resolution": 300,
+    },
+    {
+        "name": "24x24in",
+        "points": 3600,
+        "upscale": 2,
+        "border": 0,
+        "quality": 95,
+        "resolution": 300,
+    },
+    {
+        "name": "30x30in",
+        "points": 4500,
+        "upscale": 2,
+        "border": 0,
+        "quality": 95,
+        "resolution": 300,
+    },
+    {
+        "name": "cover",
+        "points": 500,
+        "upscale": 2,
+        "border": 0,
+        "quality": 95,
+        "resolution": 72,
     },
     # {
-    #     "name": "40x40cm",
-    #     "points": 4724,
-    # }, {
-    #     "name": "50x50cm",
-    #     "points": 5907,
-    # }, {
-    #     "name": "60x60cm",
-    #     "points": 7087,
-    # }, {
-    #     "name": "100x100cm",
-    #     "points": 11811,
-    # }, {
-    #     "name": "18x18in",
-    #     "points": 5400,
-    # }, {
-    #     "name": "24x30in",
-    #     "points": 7200,
-    # }, {
-    #     "name": "30x30in",
-    #     "points": 9000,
-    # }
+    #     "name": "test",
+    #     "points": 1000,
+    #     "upscale": 1,
+    #     "border": 0,
+    #     "quality": 100,
+    #     "resolution": 72,
+    # },
 ]
 
 posters = {
@@ -42,13 +70,15 @@ posters = {
     #     "substitutePalette": True,
     #     "substituteSource": False,
     # },
-    "003": {
+    "0003": {
         "description": "Tree",
         "scheme": ['45826C', '8AD392', 'FFFFFF', 'FFFFFF', 'E65549'],
         "substitutePalette": True,
         "substituteSource": False,
+        "usePredefinedCentroids": False,
     },
-    "012": {
+    "0004": {
+        "name": "Rowan",
         "description": "Рябина",
         # "scheme": ['162F38', '427A55', '9EC135', 'D44A26', 'F6E87B'],
         "scheme": ['162F38', 'FFFFFF', 'FFFFFF', 'D44A26', 'FFFFFF'],
@@ -63,17 +93,23 @@ posters = {
             [170.6008436, 159.06149406, 134.17926518],
         ],
     },
-    "005": {
+    "0005": {
+        "name": "Sitting cat",
         "description": "Киса сверху",
-        "scheme": ['D39A66', 'E4D988', 'C59566', 'AF484E', '442237'],
+        # "scheme": ['D39A66', 'E4D988', 'C59566', 'AF484E', '442237'],
+        "scheme": ['EB9F30', 'CCCFA0', '268983', '0B5473', '12263F'],
+        # "scheme": ['FFFFFF', 'CCCFA0', '268983', '0B5473', '12263F'],
         "substitutePalette": True,
         "substituteSource": False,
+        "usePredefinedCentroids": False,
     },
-    "006": {
+    "0006": {
+        "name": "Fence",
         "description": "Дерево и забор",
-        "scheme": ['CCC9CF', '09335B', '204D81', 'E6E7D7', 'F3AC88'],
+        "scheme": ['0B4A36', '33986F', '35AE90', 'C3DA71', 'FBA434'],
         "substitutePalette": True,
         "substituteSource": False,
+        "usePredefinedCentroids": False,
     },
     # "007": {
     #     "description": "веточка в стакане",
@@ -88,16 +124,74 @@ posters = {
         "substituteSource": False,
     },
     "008": {
+        "name": "Office flowers",
         "description": "Цветы в офисе на подоконнике",
         "scheme": ['406C4D', '7B8169', 'BDC1B9', 'D26B45', 'BDBFBF'],
         "substitutePalette": True,
         "substituteSource": False,
+        "usePredefinedCentroids": False,
     },
     "009": {
         "description": "Для тестов",
         "scheme": ['406C4D', '7B8169', 'BDC1B9', 'D26B45', 'BDBFBF'],
         "substitutePalette": True,
         "substituteSource": False,
+    },
+    "013": {
+        "description": "Для тестов",
+        "scheme": ['406C4D', '7B8169', 'BDC1B9', 'D26B45', 'BDBFBF'],
+        "substitutePalette": False,
+        "substituteSource": False,
+        "usePredefinedCentroids": False,
+    },
+    "014": {
+        "description": "Для тестов",
+        "scheme": ['406C4D', '7B8169', 'BDC1B9', 'D26B45', 'BDBFBF'],
+        "substitutePalette": False,
+        "substituteSource": False,
+        "usePredefinedCentroids": False,
+    },
+    "015": {
+        "description": "Для тестов",
+        "scheme": ['406C4D', '7B8169', 'BDC1B9', 'D26B45', 'BDBFBF'],
+        "substitutePalette": False,
+        "substituteSource": False,
+        "usePredefinedCentroids": False,
+    },
+    "016": {
+        "description": "Для тестов",
+        "scheme": ['406C4D', '7B8169', 'BDC1B9', 'D26B45', 'BDBFBF'],
+        "substitutePalette": False,
+        "substituteSource": False,
+        "usePredefinedCentroids": False,
+    },
+    "017": {
+        "description": "Для тестов",
+        "scheme": ['406C4D', '7B8169', 'BDC1B9', 'D26B45', 'BDBFBF'],
+        "substitutePalette": False,
+        "substituteSource": False,
+        "usePredefinedCentroids": False,
+    },
+    "0018": {
+        "name": "branch",
+        "description": "Tree",
+        # "scheme": ['455C4F', '99B970', 'E4D88B', 'D58B49', '664727'],
+        # "scheme": ['6F253C', 'DF696E', 'FBF8F3', 'BFCBC3', '0FB3AC'],
+        # "scheme": ['E7451A', 'F4F04F', 'BEBA6E', '638469', '1D3749'],
+        # "scheme": ['104051', '3B5A69', '419DA6', 'A4E4C2', '8DC03F'],
+        "scheme": ['E5AB35', 'E35824', 'B2382F', 'AB1C36', '4B194E'],
+        "substitutePalette": True,
+        "substituteSource": False,
+        "usePredefinedCentroids": False,
+    },
+    "0019": {
+        "name": "flower",
+        "description": "Tree",
+        # "scheme": ['2A252F', '666980', '8C96B1', 'D2DADD', 'FBF9F4'],  # GOOD
+        "scheme": ['2B3946', '2B3946', '354A5E', '70A5AA', 'DBDCD8'],
+        "substitutePalette": True,
+        "substituteSource": False,
+        "usePredefinedCentroids": False,
     },
 }
 

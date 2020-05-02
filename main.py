@@ -6,12 +6,12 @@ import cv2
 from PIL import Image
 from math import pow, sqrt
 from data import posters, dimensions
-from math import floor
+import numpy as np
 
-KEY = "012"
+KEY = "0019"
 POSTER = posters[KEY]
 
-PIXEL_FACTOR = 1
+PIXEL_FACTOR = 5
 SUBSTITUTE_PALETTE = POSTER['substitutePalette']
 
 if POSTER['substituteSource']:
@@ -19,14 +19,13 @@ if POSTER['substituteSource']:
 else:
     image = cv2.imread("./input/" + KEY + ".jpg")
 
-if image.shape[0] != image.shape[1]:
-    raise Exception("Input image should be square")
+# if image.shape[0] != image.shape[1]:
+#     raise Exception("Input image should be square")
 
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 if POSTER['usePredefinedCentroids']:
     centroids = POSTER['centroids']
 else:
-    exit()
     paletteSourceImage = cv2.resize(image, (300, 300))
     paletteSourceImage = paletteSourceImage.reshape((paletteSourceImage.shape[0] * paletteSourceImage.shape[1], 3))
 
@@ -37,32 +36,40 @@ else:
 
 scheme = utils.scheme_from_hexes(POSTER['scheme'])
 
-# for withBorder in [False, True]:
-for withBorder in [False]:
-    for dim in dimensions:
-        border_size = floor(dim['border'] * dim['points']) * (1 if withBorder else 0)
-        s = dim['points']
-        im = cv2.resize(image, (s - 2 * border_size, s - 2 * border_size))
-        img = Image.new(mode='RGB', size=(s, s), color=(0, 0, 0))
-        pix_new = img.load()
+# for dim in dimensions:
 
-        for y in range(0, s - 2 * border_size):
-            for x in range(0, s - 2 * border_size):
-                min_dist = 1000000
-                c_i = 0
-                (r, g, b) = im[y, x]
-                for c in range(0, 5):
-                    dist = sqrt(pow(centroids[c][0] - r, 2) + pow(centroids[c][1] - g, 2) + pow(centroids[c][2] - b, 2))
-                    if dist < min_dist:
-                        c_i = c
-                        min_dist = dist
-                pix_new[x + border_size, y + border_size] = \
+dim = dimensions[5]
+
+border_size = 0  # floor(dim['border'] * dim['points']) * (1 if withBorder else 0)
+w = dim['points']
+h = dim['points']
+u = dim['upscale']
+im = cv2.resize(image, (w, h))
+img = Image.new(mode='RGB', size=(w * u, h * u), color=(0, 0, 0))
+pix_new = img.load()
+
+for y in range(0, h):
+    if y % 100 == 0:
+        print(dim['name'] + ': ' + str(y))
+    for x in range(0, w):
+        min_dist = 1000000
+        c_i = 0
+        (r, g, b) = im[y, x]
+        for c in range(0, 5):
+            dist = sqrt(pow(centroids[c][0] - r, 2) + pow(centroids[c][1] - g, 2) + pow(centroids[c][2] - b, 2))
+            if dist < min_dist:
+                c_i = c
+                min_dist = dist
+        for dux in range(0, u):
+            for duy in range(0, u):
+                pix_new[x*u + border_size + dux, y*u + border_size + duy] = \
                     (
                         scheme[c_i][0] if SUBSTITUTE_PALETTE else int(centroids[c_i][0]),
                         scheme[c_i][1] if SUBSTITUTE_PALETTE else int(centroids[c_i][1]),
                         scheme[c_i][2] if SUBSTITUTE_PALETTE else int(centroids[c_i][2])
                     )
 
-        img.save("./output/" + KEY + '-' + dim['name'] + '-' + ('border' if withBorder else '') + "-test.jpg",
-                 quality=100, dpi=(300, 300))
-        img.close()
+img.save("./output/[" + KEY + '] ' + POSTER['name'] + ' - ' + dim['name'] + '.jpg',
+         quality=dim['quality'], dpi=(dim['resolution'], dim['resolution']))
+img.close()
+
